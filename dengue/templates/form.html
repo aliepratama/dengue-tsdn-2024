@@ -1,6 +1,7 @@
 {% from 'macros/navbar.html' import navbar %}
+{% from 'macros/stepper.html' import stepper %}
 {% extends 'base.html' %}
 {% block content %}
 {{ navbar('form') }}
-<p>Detect</p>
+{{ stepper(step)}}
 {% endblock %}
