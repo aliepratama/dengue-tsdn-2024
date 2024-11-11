@@ -1,0 +1,20 @@
+<div class="flex flex-col items-center gap-y-4">
+  <span
+    class="inline-flex gap-x-2 items-center justify-center rounded-full bg-gray-100 px-4 py-2 text-gray-600"
+  >
+    <img 
+    src="{{ url_for('static', filename='dist/icons/circle-help.svg') }}"
+    alt="Help Icon"
+    onload="SVGInject(this)">
+
+    <p class="whitespace-nowrap text-sm">Coba dengan foto sampel ini</p>
+  </span>
+  <div class="flex gap-x-4">
+    {% for i in range(1, 5) %}
+        <img 
+        src="{{ url_for('static', filename='dist/images/sample' + i|string + '.jpg') }}"
+        class="w-12 rounded-md cursor-pointer hover:scale-110 hover:shadow-lg transition-transform"
+        alt="Sample {{i}}">
+    {% endfor %}
+  </div>
+</div>

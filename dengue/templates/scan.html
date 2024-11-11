@@ -2,5 +2,21 @@
 {% extends 'base.html' %}
 {% block content %}
 {{ navbar('scan') }}
-<p>Scan</p>
+<div style="top: 0;margin-top: 80px;">
+    {% include 'partials/scan_header.html' %}
+</div>
+<div class="flex flex-col gap-y-4 items-center">
+    <div class="w-full lg:w-2/3 px-4">
+        {% include 'partials/photo_input.html' %}
+    </div>
+    {% include 'partials/try_image.html' %}
+</div>
+<img 
+    src="{{ url_for('static', filename='dist/images/sample1.jpg') }}"
+    class="hidden lg:block w-80 rounded-lg absolute z-10 blur-[2px] top-40 -left-20 -rotate-[30deg]"
+    alt="Sample {{i}}">
+<img 
+    src="{{ url_for('static', filename='dist/images/sample3.jpg') }}"
+    class="hidden lg:block w-64 rounded-lg absolute top-40 right-10 rotate-[15deg]"
+    alt="Sample {{i}}">
 {% endblock %}
