@@ -1,0 +1,16 @@
+<div role="alert" class="rounded-xl border border-gray-100 bg-white p-4">
+  <div class="flex items-start gap-4">
+    <img
+      src="{{ url_for('static', filename='dist/icons/info.svg') }}"
+      alt="Info Icon"
+      onload="SVGInject(this)"
+    />
+
+    <div class="flex-1">
+      <strong class="block font-medium text-gray-900"> Informasi data </strong>
+      <p class="mt-1 text-sm text-gray-700">
+        Data yang anda berikan akan disimpan secara aman dan rahasia.
+      </p>
+    </div>
+  </div>
+</div>
