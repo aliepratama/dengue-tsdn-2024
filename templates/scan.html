@@ -1,4 +1,6 @@
+{% from 'macros/navbar.html' import navbar %}
 {% extends 'base.html' %}
 {% block content %}
+{{ navbar('scan') }}
 <p>Scan</p>
 {% endblock %}

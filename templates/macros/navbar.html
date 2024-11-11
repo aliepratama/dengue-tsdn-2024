@@ -1,4 +1,6 @@
 {% macro navbar(active) %}
+{% set active_list = 'flex gap-x-2 py-2 px-3 text-white bg-red-700 rounded md:bg-transparent md:text-red-700 md:p-0 md:dark:text-red-500' %}
+{% set regular_list = 'flex gap-x-2 py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-red-700 md:p-0 md:dark:hover:text-red-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700' %}
 <nav
   class="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600"
 >
@@ -30,8 +32,9 @@
     </a>
   </div>
     <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-      <button
-        type="button"
+      <a
+        href="https://github.com/aliepratama/dengue-tsdn-2024"
+        target="_blank"
         class="flex gap-x-2 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
       >
         <img 
@@ -40,7 +43,7 @@
         alt="House Icon"
         onload="SVGInject(this)">
         Lihat Repository
-      </button>
+      </a>
       <button
         data-collapse-toggle="navbar-sticky"
         type="button"
@@ -75,8 +78,8 @@
       >
         <li>
           <a
-          href="#"
-          class="flex gap-x-2 py-2 px-3 text-white bg-red-700 rounded md:bg-transparent md:text-red-700 md:p-0 md:dark:text-red-500"
+          href="/"
+          class="{{ active_list if active == 'home' else regular_list }}"
           aria-current="page"
           >
             <img 
@@ -88,8 +91,8 @@
         </li>
         <li>
           <a
-          href="#"
-          class="flex gap-x-2 py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-red-700 md:p-0 md:dark:hover:text-red-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+          href="/form"
+          class="{{ active_list if active == 'form' else regular_list }}"
           aria-current="page"
           >
             <img 
@@ -101,8 +104,8 @@
         </li>
         <li>
           <a
-          href="#"
-          class="flex gap-x-2 py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-red-700 md:p-0 md:dark:hover:text-red-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+          href="/scan"
+          class="{{ active_list if active == 'scan' else regular_list }}"
           aria-current="page"
           >
             <img 
