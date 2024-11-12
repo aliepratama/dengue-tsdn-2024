@@ -26,6 +26,17 @@
         JPG dan PNG (Maksimal resolusi 800x800px)
       </p>
     </div>
-    <input id="dropzone-file" type="file" class="hidden" />
+    <form id="upload-form" action="/scan" method="post" enctype=multipart/form-data>
+      <input id="dropzone-file" name="image_url" type="file" class="hidden" accept=".jpg, .jpeg, .png" />
+    </form>
   </label>
 </div>
+
+<script>
+  const dropzoneFile = document.getElementById('dropzone-file');
+  const uploadForm = document.getElementById('upload-form');
+  
+  dropzoneFile.addEventListener('change', () => {
+    uploadForm.submit();
+  });
+</script>

@@ -15,6 +15,10 @@ def scan():
         return scn.post_scan()
     return scn.get_scan()
 
+@app.route('/sample/<int:id>', methods=['GET'])
+def sample(id:int = 0):
+    return scn.sample(id)
+
 
 @app.route('/form', methods=['GET', 'POST'])
 @app.route('/form/<int:id>', methods=['GET'])
