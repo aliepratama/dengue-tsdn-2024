@@ -1,0 +1,122 @@
+{% from 'macros/question.html' import question %}
+{% from 'macros/qa_wrapper.html' import qa_wrapper %}
+{% from 'macros/input_choice.html' import input_choice %}
+
+
+<div
+    class="block w-full px-16 py-10 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+  >
+    <h3 class="mb-10 text-3xl font-bold tracking-tight text-red-700 dark:text-white">
+        Gejala Tambahan
+    </h3>
+    <div class="flex flex-col gap-y-8">
+        <!-- Baris 1 -->
+        <div class="grid gap-6 md:grid-cols-2">
+            {{ qa_wrapper(
+                question(
+                    title='Apakah Anda mengalami sakit kepala parah?', 
+                    description='Sakit kepala parah biasanya disertai dengan gejala lain seperti mual dan muntah', 
+                    image=url_for('static', filename='dist/images/fainting.png'), 
+                    label_for='SKPLA'
+                    ),
+                input_choice(
+                    name='SKPLA', 
+                    choices=['Iya', 'Tidak']
+                    )
+            ) }}
+            {{ qa_wrapper(
+                question(
+                    title='Apakah Anda merasakan nyeri di belakang mata?', 
+                    description='Nyeri di belakang mata dapat dirasakan saat bergerak atau menolehkan kepala', 
+                    image=url_for('static', filename='dist/images/eye.png'), 
+                    label_for='NYMAT'
+                    ),
+                input_choice(
+                    name='NYMAT', 
+                    choices=['Iya', 'Tidak']
+                    )
+            ) }}
+        </div>
+        <!-- Baris 2 -->
+        <div class="grid gap-6 md:grid-cols-2">
+            {{ qa_wrapper(
+                question(
+                    title='Apakah Anda merasakan nyeri pada sendi atau otot?', 
+                    description='Nyeri sendi atau otot biasanya dirasakan di beberapa bagian', 
+                    image=url_for('static', filename='dist/images/muscle-pain.png'), 
+                    label_for='NYSEN'
+                    ),
+                input_choice(
+                    name='NYSEN', 
+                    choices=['Iya', 'Tidak']
+                    )
+            ) }}
+            {{ qa_wrapper(
+                question(
+                    title='Apakah Anda merasakan rasa logam di mulut?', 
+                    description='Mulut yang terasa seperti logam disebut dysgeusia, atau penyimpangan sensasi rasa', 
+                    image=url_for('static', filename='dist/images/disease.png'), 
+                    label_for='RSMUL'
+                    ),
+                input_choice(
+                    name='RSMUL', 
+                    choices=['Iya', 'Tidak']
+                    )
+            ) }}
+        </div>
+        <!-- Baris 3 -->
+        <div class="grid gap-6 md:grid-cols-2">
+            {{ qa_wrapper(
+                question(
+                    title='Apakah Anda kehilangan nafsu makan?', 
+                    description='Anda sudah tidak selera makan apapun dalam beberapa hari terakhir', 
+                    image=url_for('static', filename='dist/images/loss-of-appetite.png'), 
+                    label_for='HINFM'
+                    ),
+                input_choice(
+                    name='HINFM', 
+                    choices=['Iya', 'Tidak']
+                    )
+            ) }}
+            {{ qa_wrapper(
+                question(
+                    title='Apakah Anda mengalami nyeri perut?', 
+                    description='Nyeri perut biasanya dirasakan di bagian perut atas atau bawah', 
+                    image=url_for('static', filename='dist/images/abdominal-pain.png'), 
+                    label_for='NYPER'
+                    ),
+                input_choice(
+                    name='NYPER', 
+                    choices=['Iya', 'Tidak']
+                    )
+            ) }}
+        </div>
+        <!-- Baris 4 -->
+        <div class="grid gap-6 md:grid-cols-2">
+            {{ qa_wrapper(
+                question(
+                    title='Apakah Anda mengalami mual atau muntah?', 
+                    description='Mual dan muntah biasanya disertai dengan gejala lain seperti sakit kepala', 
+                    image=url_for('static', filename='dist/images/vomit.png'), 
+                    label_for='MUMUN'
+                    ),
+                input_choice(
+                    name='MUMUN', 
+                    choices=['Iya', 'Tidak']
+                    )
+            ) }}
+            {{ qa_wrapper(
+                question(
+                    title='Apakah Anda mengalami diare?', 
+                    description='Frekuensi buang air besar (BAB) meningkat dan feses yang dikeluarkan bertekstur encer atau cair', 
+                    image=url_for('static', filename='dist/images/diarrhea.png'), 
+                    label_for='MDIAR'
+                    ),
+                input_choice(
+                    name='MDIAR', 
+                    choices=['Iya', 'Tidak']
+                    )
+            ) }}
+        </div>
+    </div>
+</div>

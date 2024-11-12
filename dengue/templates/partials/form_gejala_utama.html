@@ -1,0 +1,84 @@
+{% from 'macros/question.html' import question %}
+{% from 'macros/qa_wrapper.html' import qa_wrapper %}
+{% from 'macros/input_num.html' import input_num %}
+{% from 'macros/input_choice.html' import input_choice %}
+
+
+<div
+    class="block w-full px-16 py-10 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+  >
+    <h3 class="mb-10 text-3xl font-bold tracking-tight text-red-700 dark:text-white">
+        Gejala Utama
+    </h3>
+    <div class="flex flex-col gap-y-8">
+        <div class="flex flex-col gap-y-4">
+            {{ qa_wrapper(
+                question(
+                    title='Apakah anda merasakan demam?', 
+                    description='Jika suhu tubuh anda di atas 38°C, maka anda seharusnya merasakan demam', 
+                    image=url_for('static', filename='dist/images/sick.png'), 
+                    label_for='KDEMA'
+                    ),
+                input_choice(
+                    name='KDEMA', 
+                    choices=['Iya', 'Tidak'],
+                    w_mode='fit',
+                    ),
+                mode='row'
+            ) }}
+        </div>
+        <div class="grid gap-6 md:grid-cols-2">
+            {{ qa_wrapper(
+                question(
+                    title='Durasi demam (hari)', 
+                    description='Berapa lama Anda merasakan demam?', 
+                    image=url_for('static', filename='dist/images/schedule.png'), 
+                    label_for='DDEMA'
+                    ),
+                input_num(
+                    name='DDEMA', 
+                    min=1,
+                    step=1,
+                    value=1,
+                    ),
+            ) }}
+            {{ qa_wrapper(
+                question(
+                    title='Suhu saat ini (°C)', 
+                    description='Anda dapat mengecek suhu tubuh Anda dengan termometer', 
+                    image=url_for('static', filename='dist/images/thermometer.png'), 
+                    label_for='SUHUN'
+                    ),
+                input_num(
+                    name='SUHUN', 
+                    min=35.0,
+                    max=45.0,
+                    step=0.1,
+                    value=38.2,
+                    ),
+            ) }}
+        </div>
+    </div>
+    <script>
+        const onKdema = () => {
+            const kdemaValue = document.querySelector('input[name=KDEMA]:checked').value;
+            document.querySelector('img#ddema-img').style.transition = '0.5s';
+            document.querySelector('img#suhun-img').style.transition = '0.5s';
+            if (kdemaValue == 'Iya') {
+                document.querySelector('input[name=DDEMA]').disabled = false;
+                document.querySelector('input[name=SUHUN]').disabled = false;
+                document.querySelector('img#ddema-img').style.filter = 'none';
+                document.querySelector('img#suhun-img').style.filter = 'none';
+            } else {
+                document.querySelector('input[name=DDEMA]').disabled = true;
+                document.querySelector('input[name=SUHUN]').disabled = true;
+                document.querySelector('img#ddema-img').style.filter = 'grayscale(100%)';
+                document.querySelector('img#suhun-img').style.filter = 'grayscale(100%)';
+            }
+        }
+
+        document.querySelectorAll('input[name=KDEMA]').forEach(input => {
+            input.addEventListener('change', onKdema);
+        });
+    </script>
+</div>

@@ -1,0 +1,127 @@
+{% from 'macros/question.html' import question %}
+{% from 'macros/qa_wrapper.html' import qa_wrapper %}
+{% from 'macros/input_num.html' import input_num %}
+{% from 'macros/input_choice.html' import input_choice %}
+
+
+<div
+    class="block w-full px-16 py-10 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+  >
+    <h3 class="mb-10 text-3xl font-bold tracking-tight text-red-700 dark:text-white">
+        Uji Laboratorium
+    </h3>
+    <div class="flex flex-col gap-y-8">
+        <div class="flex flex-col gap-y-4">
+            {{ qa_wrapper(
+                question(
+                    title='Apakah anda sudah melakukan uji darah di Laboratorium?', 
+                    description='Uji darah dapat dilakukan untuk mengetahui kondisi tubuh Anda', 
+                    image=url_for('static', filename='dist/images/blood-analysis.png'), 
+                    label_for='ULABO'
+                    ),
+                input_choice(
+                    name='ULABO', 
+                    choices=['Sudah', 'Belum'],
+                    w_mode='fit',
+                    ),
+                mode='row'
+            ) }}
+        </div>
+        <div class="grid gap-6 md:grid-cols-2">
+            {{ qa_wrapper(
+                question(
+                    title='Jumlah WBC (sel darah putih) [×10^3/uL]', 
+                    description='Jumlah sel darah putih yang normal berkisar antara 4.5-11.0 ×10^3/uL', 
+                    image=url_for('static', filename='dist/images/white-blood-cell.png'), 
+                    label_for='JWBCS'
+                    ),
+                input_num(
+                    name='JWBCS', 
+                    min=1.0,
+                    max=15.0,
+                    step=0.1,
+                    value=6.0,
+                    ),
+            ) }}
+            {{ qa_wrapper(
+                question(
+                    title='Hemoglobin [g/dL]', 
+                    description='Hemoglobin adalah protein yang membawa oksigen dalam sel darah merah', 
+                    image=url_for('static', filename='dist/images/red-blood-cells.png'), 
+                    label_for='HEMOG'
+                    ),
+                input_num(
+                    name='HEMOG', 
+                    min=10.0,
+                    max=20.0,
+                    step=0.1,
+                    value=14.0,
+                    ),
+            ) }}
+        </div>
+        <div class="grid gap-6 md:grid-cols-2">
+            {{ qa_wrapper(
+                question(
+                    title='Hematokrit [%]', 
+                    description='Hematokrit adalah persentase volume sel darah merah dalam darah', 
+                    image=url_for('static', filename='dist/images/blood-test.png'), 
+                    label_for='HEMAT'
+                    ),
+                input_num(
+                    name='HEMAT', 
+                    min=1,
+                    max=70,
+                    step=1,
+                    value=40,
+                    ),
+            ) }}
+            {{ qa_wrapper(
+                question(
+                    title='Jumlah Platelet [×10^3/uL]', 
+                    description='Jumlah platelet yang normal berkisar antara 150-450 ×10^3/uL', 
+                    image=url_for('static', filename='dist/images/thermometer.png'), 
+                    label_for='JPLAT'
+                    ),
+                input_num(
+                    name='JPLAT', 
+                    min=1,
+                    max=700,
+                    step=1,
+                    value=150,
+                    ),
+            ) }}
+        </div>
+    </div>
+    <script>
+        const onUlabo = () => {
+            const ulaboValue = document.querySelector('input[name=ULABO]:checked').value;
+            document.querySelector('img#jwbcs-img').style.transition = '0.5s';
+            document.querySelector('img#hemog-img').style.transition = '0.5s';
+            document.querySelector('img#hemat-img').style.transition = '0.5s';
+            document.querySelector('img#jplat-img').style.transition = '0.5s';
+            if (ulaboValue == 'Sudah') {
+                document.querySelector('input[name=JWBCS]').disabled = false;
+                document.querySelector('input[name=HEMOG]').disabled = false;
+                document.querySelector('input[name=HEMAT]').disabled = false;
+                document.querySelector('input[name=JPLAT]').disabled = false;
+                document.querySelector('img#jwbcs-img').style.filter = 'none';
+                document.querySelector('img#hemog-img').style.filter = 'none';
+                document.querySelector('img#hemat-img').style.filter = 'none';
+                document.querySelector('img#jplat-img').style.filter = 'none';
+            } else {
+                document.querySelector('input[name=JWBCS]').disabled = true;
+                document.querySelector('input[name=HEMOG]').disabled = true;
+                document.querySelector('input[name=HEMAT]').disabled = true;
+                document.querySelector('input[name=JPLAT]').disabled = true;
+                document.querySelector('img#jwbcs-img').style.filter = 'grayscale(100%)';
+                document.querySelector('img#hemog-img').style.filter = 'grayscale(100%)';
+                document.querySelector('img#hemat-img').style.filter = 'grayscale(100%)';
+                document.querySelector('img#jplat-img').style.filter = 'grayscale(100%)';
+            }
+        }
+
+        document.querySelectorAll('input[name=ULABO]').forEach(input => {
+            input.addEventListener('change', onUlabo);
+        });
+    </script>
+</div>

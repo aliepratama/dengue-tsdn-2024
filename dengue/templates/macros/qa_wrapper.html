@@ -1,0 +1,6 @@
+{% macro qa_wrapper(question, input_form, mode='col') %}
+<div class="flex flex-col gap-y-4 {{ 'md:flex-row gap-x-4 justify-between' if mode == 'row' else '' }}">
+    {{ question }}
+    {{ input_form }}
+</div>
+{% endmacro %}

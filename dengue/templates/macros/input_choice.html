@@ -1,0 +1,30 @@
+{% macro input_choice(name, choices, value_index=-1, w_mode='full') %} 
+{% set active_choice = 'bg-red-700 text-white ring-red-700' %}
+{% set inactive_choice = 'bg-white text-gray-900 border-gray-200 dark:bg-gray-800 dark:border-gray-700
+dark:text-white dark:hover:text-white dark:hover:bg-gray-700' %}
+<ul
+  class="{{ 'w-full' if w_mode == 'full' else '' }} items-center text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+>
+  {% for choice in choices %}
+  <li
+    class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600"
+  >
+    <div class="flex items-center px-8">
+      <input
+        id="horizontal-list-radio-{{ name | lower }}-{{ loop.index0 }}"
+        type="radio"
+        value="{{ choice }}"
+        name="{{ name }}"
+        {{ 'checked' if loop.index0 == value_index else '' }}
+        class="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 focus:ring-red-500 dark:focus:ring-red-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+      />
+      <label
+        for="horizontal-list-radio-{{ name | lower }}-{{ loop.index0 }}"
+        class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+        >{{ choice }}</label
+      >
+    </div>
+  </li>
+  {% endfor %}
+</ul>
+{% endmacro %}

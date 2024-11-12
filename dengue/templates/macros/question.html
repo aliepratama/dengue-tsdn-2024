@@ -1,0 +1,17 @@
+{% macro question(title, description, image, label_for=None) %}
+<div
+  class="flex gap-x-8 items-center"
+>
+  <img id="{{ label_for | lower ~ '-img' if label_for else '' }}" src="{{ image }}" alt="Question" class="w-16" />
+  <label for="{{ label_for | lower if label_for else '' }}" class="flex flex-col">
+    <h5
+      class="mb-2 text-xl font-medium tracking-tight text-gray-900 dark:text-white"
+    >
+      {{ title }}
+    </h5>
+    <p class="font-normal text-gray-700 dark:text-gray-400">
+      {{ description }}
+    </p>
+  </label>
+</div>
+{% endmacro %}

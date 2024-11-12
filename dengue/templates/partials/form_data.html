@@ -1,0 +1,92 @@
+{% from 'macros/question.html' import question %}
+{% from 'macros/qa_wrapper.html' import qa_wrapper %}
+{% from 'macros/input_wrapper.html' import input_wrapper %}
+{% from 'macros/input_text.html' import input_text %}
+{% from 'macros/input_num.html' import input_num %}
+{% from 'macros/input_choice.html' import input_choice %}
+{% from 'macros/button_location.html' import button_location %}
+
+
+<div
+    class="block w-full px-16 py-10 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+  >
+    <h3 class="mb-10 text-3xl font-bold tracking-tight text-red-700 dark:text-white">
+        Data diri
+    </h3>
+    <div class="flex flex-col gap-y-8">
+        <div class="flex flex-col gap-y-4">
+            {{ qa_wrapper(
+                question(
+                    title='Nama lengkap', 
+                    description='Masukkan nama lengkap Anda sesuai dengan KTP', 
+                    image=url_for('static', filename='dist/images/id-card.png'), 
+                    label_for='PNAMA'
+                    ),
+                input_text(
+                    name='PNAMA', 
+                    placeholder='Masukkan nama lengkap Anda disini', 
+                    required=True
+                    )
+            ) }}
+        </div>
+        <div class="grid gap-6 md:grid-cols-2">
+            {{ qa_wrapper(
+                question(
+                    title='Umur', 
+                    description='Masukkan umur Anda', 
+                    image=url_for('static', filename='dist/images/age-group.png'), 
+                    label_for='PUMUR'
+                    ),
+                input_num(
+                    name='PUMUR', 
+                    min=1,
+                    step=1,
+                    value=20,
+                    required=True
+                    ),
+            ) }}
+            {{ qa_wrapper(
+                question(
+                    title='Jenis Kelamin', 
+                    description='Pilih jenis kelamin Anda', 
+                    image=url_for('static', filename='dist/images/equality.png'), 
+                    label_for='PJKEL'
+                    ),
+                input_choice(
+                    name='PJKEL', 
+                    choices=['Pria', 'Wanita']
+                    )
+            ) }}
+        </div>
+        <div class="grid gap-6 md:grid-cols-2">
+            {{ qa_wrapper(
+                question(
+                    title='Alamat', 
+                    description='Masukkan alamat anda atau isi secara otomatis', 
+                    image=url_for('static', filename='dist/images/real-estate.png'), 
+                    label_for='PALAM'
+                    ),
+                input_wrapper(
+                    input_text(
+                        name='PALAM', 
+                        placeholder='Masukkan alamat lengkap Anda disini', 
+                        required=True
+                        ),
+                    button_location(target='PALAM')
+                )
+            ) }}
+            {{ qa_wrapper(
+                question(
+                    title='Tempat tinggal', 
+                    description='Pilih jenis tempat tinggal Anda', 
+                    image=url_for('static', filename='dist/images/adress.png'), 
+                    label_for='PTEMP'
+                    ),
+                input_choice(
+                    name='PTEMP', 
+                    choices=['Pedesaan', 'Perkotaan']
+                    )
+            ) }}
+        </div>
+    </div>
+</div>

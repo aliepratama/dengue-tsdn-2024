@@ -1,0 +1,18 @@
+<form action="form/" action="post" class="flex flex-col gap-y-6 px-4 lg:px-16">
+    {% include 'partials/form_data.html' %} {% include
+    'partials/form_gejala_utama.html' %} {% include
+    'partials/form_gejala_tambahan.html' %} {% include
+    'partials/form_uji_lab.html' %}
+    <button
+      type="submit"
+      class="flex items-center justify-center gap-x-2 px-4 py-2 text-sm font-medium text-white bg-red-700 border border-transparent rounded-md shadow-sm hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+    >
+      <img
+        src="{{ url_for('static', filename='dist/icons/scan-search.svg') }}"
+        alt="Mask Icon"
+        onload="SVGInject(this)"
+      />
+      <input type="hidden" name="s" value="next">
+      <span class="text-nowrap">Periksa</span>
+    </button>
+</form>
