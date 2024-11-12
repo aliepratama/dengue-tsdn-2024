@@ -1,0 +1,41 @@
+{% from 'macros/card_recommendation.html' import card_recommendation %}
+
+<section class="bg-white">
+  <div class="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+    <h2
+      class="text-center text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl"
+    >
+      Kami merekomendasikan untuk
+    </h2>
+
+    <div class="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-8">
+        {{
+            card_recommendation(
+                title="Konsultasi ke dokter",
+                description="Segera periksakan diri ke dokter atau rumah sakit untuk mendapatkan penanganan lebih lanjut",
+                image_url=url_for('static', filename='dist/images/doctor.png'),
+                button_title="Cari Dokter",
+                button_url="https://www.google.com/maps/search/rumah+sakit+terdekat"
+            )
+        }}
+        {{
+            card_recommendation(
+                title="Melakukan penyemprotan",
+                description="Hubungi petugas kesehatan untuk melakukan penyemprotan di sekitar rumah Anda",
+                image_url=url_for('static', filename='dist/images/fogging.png'),
+                button_title="Cari petugas kesehatan",
+                button_url="https://www.google.com/maps/search/puskesmas+terdekat"
+            )
+        }}
+        {{
+            card_recommendation(
+                title="Memberi bubuk abate",
+                description="Larutkan bubuk abate di tempat-tempat yang berpotensi menjadi tempat berkembang biak nyamuk",
+                image_url=url_for('static', filename='dist/images/mosquito (1).png'),
+                button_title="Cari bubuk abate",
+                button_url="https://www.google.com/search?q=bubuk+abate+terdekat&tbm=shop"
+            )
+        }}
+    </div>
+  </div>
+</section>

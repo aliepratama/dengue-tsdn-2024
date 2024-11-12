@@ -9,5 +9,5 @@ def get_form(id: int) -> str:
 
 
 def post_form() -> str | Response:
-    return redirect(url_for('form'))
+    return redirect('form/2')
 

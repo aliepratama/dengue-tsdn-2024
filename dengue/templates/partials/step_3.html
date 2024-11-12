@@ -1,0 +1,13 @@
+{% from 'macros/card_result.html' import card_result %}
+
+
+<div class="flex flex-col items-center px-4 md:px-16">
+    {% include 'partials/alert_rating.html' %}
+    {{ card_result(
+        title='Anda kemungkinan terkena penyakit dengue', 
+        description='Segera periksakan diri ke dokter atau rumah sakit untuk mendapatkan penanganan lebih lanjut',
+        image_url=url_for('static', filename='dist/images/mosquito.png')
+        ) 
+    }}  
+    {% include 'partials/header_rekomendasi.html' %}
+</div>

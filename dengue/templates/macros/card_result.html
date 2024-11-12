@@ -1,0 +1,47 @@
+{% macro card_result(title, description, image_url) %}
+<div
+  class="mt-0 md:mt-8 flex flex-col md:flex-row gap-4 w-full lg:w-1/2 bg-white border border-gray-200 rounded-lg shadow-lg dark:bg-gray-800 dark:border-gray-700 px-4"
+>
+  <div class="flex justify-center items-center aspect-square p-12">
+    <img
+      class="w-40 rounded-t-lg"
+      src="{{ image_url }}"
+      alt="Classification Result"
+    />
+  </div>
+  <div class="flex flex-col p-5 gap-y-2">
+    <h5
+      class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+    >
+      {{ title }}
+    </h5>
+    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+      {{ description }}
+    </p>
+    <div class="flex flex-col gap-4 md:flex-row">
+      <a
+        href="/"
+        class="flex justify-center md:justify-normal gap-x-2 rounded px-4 py-2 text-sm font-medium text-red-700 shadow hover:text-red-700 focus:outline-none focus:ring active:text-red-500 sm:w-auto"
+      >
+        <img
+          src="{{ url_for('static', filename='dist/icons/house.svg') }}"
+          alt="Home Icon"
+          onload="SVGInject(this)"
+        />
+        Kembali ke beranda
+      </a>
+      <a
+        href="/form"
+        class="flex justify-center md:justify-normal gap-x-2 rounded bg-red-700 px-4 py-2 text-sm font-medium text-white shadow hover:bg-red-700 focus:outline-none focus:ring active:bg-red-500 sm:w-auto"
+      >
+        <img
+          src="{{ url_for('static', filename='dist/icons/rotate-ccw.svg') }}"
+          alt="Restart Icon"
+          onload="SVGInject(this)"
+        />
+        Coba Lagi
+      </a>
+    </div>
+  </div>
+</div>
+{% endmacro %}
