@@ -1,0 +1,33 @@
+{% macro header_with_button_next(title, target, reset=False) %}
+<div class="flex w-full justify-between items-center py-4">
+    <h3 class="text-3xl font-bold tracking-tight text-red-700 dark:text-white">
+        {{ title }}
+    </h3>
+    <div class="flex gap-x-4">
+        {% if reset %}
+        <a
+        href="/form"
+        class="flex gap-x-2 rounded px-4 py-2 text-sm font-medium text-red-700 shadow hover:text-red-700 focus:outline-none focus:ring active:text-red-500 sm:w-auto"
+        >
+            <img
+                src="{{ url_for('static', filename='dist/icons/arrow-left.svg') }}"
+                alt="Mask Icon"
+                onload="SVGInject(this)"
+            />
+            <span class="text-nowrap">Kembali</span>
+        </a>
+        {% endif %}
+        <a
+        href="{{ target }}"
+        class="flex h-fit items-center justify-center gap-x-2 px-4 py-2 text-sm font-medium text-white bg-red-700 border border-transparent rounded-md shadow-sm hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+        >
+            <img
+                src="{{ url_for('static', filename='dist/icons/arrow-right.svg') }}"
+                alt="Mask Icon"
+                onload="SVGInject(this)"
+            />
+            <span class="text-nowrap">Lanjut</span>
+        </a>
+    </div>
+</div>
+{% endmacro %}

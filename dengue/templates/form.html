@@ -7,9 +7,9 @@
     {{ stepper(step) }}
 </div>
 {% if step == 0 %}
-    {% include 'partials/step_1.html'%}
+{% include 'partials/step_1.html'%}
 {% elif step == 1 %}
-    {% include 'partials/step_2.html'%}
+    {% include 'partials/step_2.html' %}
 {% elif step == 2 %}
     {% include 'partials/step_3.html'%}
 {% endif %}

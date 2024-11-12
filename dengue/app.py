@@ -17,10 +17,12 @@ def scan():
 
 
 @app.route('/form', methods=['GET', 'POST'])
-def form():
+@app.route('/form/<int:id>', methods=['GET'])
+def form(id:int = 0):
     if request.method == 'POST':
         return frm.post_form()
-    return frm.get_form()
+    return frm.get_form(id)
+
 
 @app.errorhandler(404)
 def page_not_found(e):
