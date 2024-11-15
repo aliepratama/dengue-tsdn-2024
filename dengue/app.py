@@ -34,7 +34,6 @@ def create_app():
         app.config["BASE_URL"] = public_url
         init_webhooks(public_url)
 
-    # ... Initialize Blueprints and the rest of our app
 
     return app
 
@@ -56,13 +55,16 @@ def scan():
 def sample(id:int = 0):
     return scn.sample(id)
 
-
-@app.route('/form', methods=['GET', 'POST'])
-@app.route('/form/<int:id>', methods=['GET'])
+@app.route('/form')
+@app.route('/form/<int:id>')
 def form(id:int = 0):
+    return frm.get_form(id)
+
+@app.route('/forminput', methods=['GET', 'POST'])
+def form_input():
     if request.method == 'POST':
         return frm.post_form()
-    return frm.get_form(id)
+    return frm.get_form(1)
 
 
 @app.errorhandler(404)
