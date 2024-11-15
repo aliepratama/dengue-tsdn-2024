@@ -1,11 +1,20 @@
 from flask import render_template, request, url_for, flash, redirect
 from PIL import Image
-import io, os
+from inference_sdk import InferenceHTTPClient
+import io
+import os
+
 
 def get_scan():
     return render_template('scan.html')
 
+
 def post_scan():
+    IMG_PATH = os.path.join(os.getcwd(), 'dengue/static/dist/images/temp.jpg')
+    CLIENT = InferenceHTTPClient(
+        api_url="https://detect.roboflow.com",
+        api_key=os.environ.get("ROBOFLOW_API_KEY")
+    )
     allowed_extensions = {'.png', '.jpg', '.jpeg'}
     image_file = request.files.get('image_url')
     if not image_file:
@@ -21,12 +30,25 @@ def post_scan():
     if image_file:
         image = image.resize((256, 256))
         image = image.convert('RGB')
-        image.save(os.path.join(os.getcwd(), 'dengue/static/dist/images/temp.jpg'))
-        return result(url_for('static', filename='dist/images/temp.jpg'))
+        image.save(os.path.join(
+            os.getcwd(), IMG_PATH))
+        predict = CLIENT.infer(
+            IMG_PATH, model_id="aedes_classification-ys5y3/2")
+        return result(url_for('static', filename='dist/images/temp.jpg'), predict['top'], predict['confidence'])
     return render_template('scan.html')
 
-def sample(id:int = 1):
-    return result(url_for('static', filename=f'dist/images/sample{id}.jpg'))
 
-def result(image):
-    return render_template('result.html', preview=image)
+def sample(id: int = 1):
+    IMG_PATH = os.path.join(
+        os.getcwd(), f'dengue/static/dist/images/sample{id}.jpg')
+    CLIENT = InferenceHTTPClient(
+        api_url="https://detect.roboflow.com",
+        api_key=os.environ.get("ROBOFLOW_API_KEY")
+    )
+    predict = CLIENT.infer(
+        IMG_PATH, model_id="aedes_classification-ys5y3/2")
+    return result(url_for('static', filename=f'dist/images/sample{id}.jpg'), predict['top'], predict['confidence'])
+
+
+def result(image, predict, confidence):
+    return render_template('result.html', preview=image, predict=predict, confidence=confidence)

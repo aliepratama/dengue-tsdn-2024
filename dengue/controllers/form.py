@@ -1,5 +1,6 @@
 from flask import render_template, request, redirect, url_for, Response
-import joblib, os
+import joblib
+import os
 import pandas as pd
 
 
@@ -23,8 +24,10 @@ def post_form() -> str | Response:
         'dengue._hematocri': int(request.form.get('HEMAT')) if is_uji_lab else 0,
         'dengue.platelet': int(request.form.get('JPLAT')) if is_uji_lab else 0,
     }, index=[0])
-    normalizer = joblib.load(os.path.join(os.getcwd(), 'dengue/models', 'normalizer.joblib'))
-    df_normalization = pd.DataFrame(normalizer(df_normalization), columns=df_normalization.columns)
+    normalizer = joblib.load(os.path.join(
+        os.getcwd(), 'dengue/models', 'normalizer.joblib'))
+    df_normalization = pd.DataFrame(normalizer(
+        df_normalization), columns=df_normalization.columns)
 
     general_symptoms = {
         'SKPLA': 'dengue.servere_headche',
@@ -43,7 +46,7 @@ def post_form() -> str | Response:
 
     if is_demam:
         df_fever = pd.DataFrame({
-            'dengue.days': df_normalization['dengue.days'], 
+            'dengue.days': df_normalization['dengue.days'],
             'current_temp': df_normalization['current_temp'],
         }, index=[0])
 
@@ -58,18 +61,23 @@ def post_form() -> str | Response:
     print(df_normalization)
 
     if is_demam and is_uji_lab:
-        model = joblib.load(os.path.join(os.getcwd(), 'dengue/models', 'all_data.joblib'))
-        prediction = model.predict(pd.concat([df_fever, df_lab, df_general], axis=1))
+        model = joblib.load(os.path.join(
+            os.getcwd(), 'dengue/models', 'all_data.joblib'))
+        prediction = model.predict(
+            pd.concat([df_fever, df_lab, df_general], axis=1))
         return render_template('form.html', step=2, prediction=prediction[0])
     elif is_demam and not is_uji_lab:
-        model = joblib.load(os.path.join(os.getcwd(), 'dengue/models', 'fever_general_data.joblib'))
+        model = joblib.load(os.path.join(
+            os.getcwd(), 'dengue/models', 'fever_general_data.joblib'))
         prediction = model.predict(pd.concat([df_fever, df_general], axis=1))
         return render_template('form.html', step=2, prediction=prediction[0])
     elif not is_demam and is_uji_lab:
-        model = joblib.load(os.path.join(os.getcwd(), 'dengue/models', 'lab_general_data.joblib'))
+        model = joblib.load(os.path.join(
+            os.getcwd(), 'dengue/models', 'lab_general_data.joblib'))
         prediction = model.predict(pd.concat([df_lab, df_general], axis=1))
         return render_template('form.html', step=2, prediction=prediction[0])
     else:
-        model = joblib.load(os.path.join(os.getcwd(), 'dengue/models', 'only_general_data.joblib'))
+        model = joblib.load(os.path.join(
+            os.getcwd(), 'dengue/models', 'only_general_data.joblib'))
         prediction = model.predict(df_general)
         return render_template('form.html', step=2, prediction=prediction[0])
