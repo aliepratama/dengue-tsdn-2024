@@ -5,4 +5,24 @@
 <div style="top: 0;margin-top: 80px;">
     {% include 'partials/home_header.html' %}
 </div>
+<section class="py-2 md:py-16">
+    <div id="chart" class="chart mx-auto w-full lg:w-3/4 px-8"></div>
+</section>
+<script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+<script type='text/javascript'>
+  let graphs = {{ map_plot | tojson | safe }};
+  Plotly.plot('chart',graphs,{
+    autosize: true,
+    responsive: true,
+    title: {
+        font: {
+            family: 'General Sans, sans-serif',
+        },
+        automargin: true,
+    }
+  });
+  window.onresize = function() {
+    Plotly.Plots.resize(document.getElementById('chart'));
+  };
+</script>
 {% endblock %}
