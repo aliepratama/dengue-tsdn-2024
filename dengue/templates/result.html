@@ -1,11 +1,17 @@
 {% from 'macros/navbar.html' import navbar %}
+{% from 'macros/image_text.html' import image_text %}
 {% extends 'base.html' %}
 {% block content %}
 {{ navbar('scan') }}
 <div style="top: 0;margin-top: 80px;">
     {% include 'partials/scan_header.html' %}
 </div>
-<img src="{{ preview }}" alt="preview">
-<p>{{ predict }}</p>
-<p>{{ confidence }}</p>
+{% include 'partials/alert_rating.html' %}
+{{ image_text(
+    image_url=preview,
+    predict=confidence,
+    caption=predict
+    ) 
+}}
+{% include 'partials/header_rekomendasi.html' %}
 {% endblock %}

@@ -34,7 +34,7 @@ def post_scan():
             os.getcwd(), IMG_PATH))
         predict = CLIENT.infer(
             IMG_PATH, model_id="aedes_classification-ys5y3/2")
-        return result(url_for('static', filename='dist/images/temp.jpg'), predict['top'], predict['confidence'])
+        return result(url_for('static', filename='dist/images/temp.jpg'), predict['top'], f'{predict['confidence'] * 100:.2f}%')
     return render_template('scan.html')
 
 
@@ -47,7 +47,7 @@ def sample(id: int = 1):
     )
     predict = CLIENT.infer(
         IMG_PATH, model_id="aedes_classification-ys5y3/2")
-    return result(url_for('static', filename=f'dist/images/sample{id}.jpg'), predict['top'], predict['confidence'])
+    return result(url_for('static', filename=f'dist/images/sample{id}.jpg'), predict['top'], f'{predict['confidence'] * 100:.2f}%')
 
 
 def result(image, predict, confidence):

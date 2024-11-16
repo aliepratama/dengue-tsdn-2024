@@ -3,8 +3,18 @@ import sys
 from dotenv import load_dotenv
 from flask import Flask, request
 from dengue.controllers import index as idx, scan as scn, form as frm, handler as hdl
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+from sqlalchemy.orm import DeclarativeBase
 
 load_dotenv()
+
+
+class Base(DeclarativeBase):
+    pass
+
+
+db = SQLAlchemy(model_class=Base)
 
 
 def init_webhooks(base_url):
@@ -14,6 +24,12 @@ def init_webhooks(base_url):
 
 def create_app():
     app = Flask(__name__)
+
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///dengue.db"
+
+    db.init_app(app)
+
+    Migrate(app,db)
 
     # Initialize our ngrok settings into Flask
     app.config.from_mapping(

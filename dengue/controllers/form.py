@@ -2,6 +2,7 @@ from flask import render_template, request, redirect, url_for, Response
 import joblib
 import os
 import pandas as pd
+# from dengue.models.users import Users
 
 
 def get_form(id: int) -> str:
@@ -58,7 +59,15 @@ def post_form() -> str | Response:
             'dengue.platelet': df_normalization['dengue.platelet'],
         }, index=[0])
 
-    print(df_normalization)
+    # if is_human:
+    #     user = Users(
+    #         name=request.form.get('PNAMA'),
+    #         age=int(request.form.get('PUMUR')),
+    #         gender=request.form.get('PJKEL'),
+    #         address=request.form.get('PALAM'),
+    #         address_type=request.form.get('PTEMP'))
+    #     db.session.add(user)
+    #     db.session.commit()
 
     if is_demam and is_uji_lab:
         model = joblib.load(os.path.join(
