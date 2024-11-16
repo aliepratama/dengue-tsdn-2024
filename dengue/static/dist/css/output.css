@@ -2574,6 +2574,10 @@ input:checked + .toggle-bg {
     margin-top: 2rem;
   }
 
+  .md\:block {
+    display: block;
+  }
+
   .md\:flex {
     display: flex;
   }
