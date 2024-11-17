@@ -1,5 +1,7 @@
+<p align="center">
 <img src="https://dataacademy.co.id/wp-content/uploads/2024/10/Asset-1.png" width="75"/>
 <img src="https://sayyidahnuraruni.files.wordpress.com/2015/04/logo-uty-png.png" width="75"/>
+</p>
 
 ## **Sistem deteksi dini demam berdarah dan klasifikasi nyamuk Aedes aegypti**
 
@@ -47,3 +49,9 @@ USE_NGROK=<True | False>
 NGROK_AUTHTOKEN=<Isi token anda>
 ROBOFLOW_API_KEY=<Isi token anda>
 ```
+
+### Demo Prototype
+
+
+https://github.com/user-attachments/assets/3ab920ee-c1ee-45aa-bbc0-5a9b4468f68a
+
